@@ -10,6 +10,7 @@ const addBtn = document.getElementById('add-btn');
 
 // -------end of variables----------------
 
+
 function EditMode(a , b){
     a.style.display = 'none'
     b.style.display = 'inline-block'
@@ -18,12 +19,13 @@ function viewMode(a , b){
     a.style.display = 'inline-block'
     b.style.display = 'none'
 }
-// function updatePercentBar() {
-//     const amountPaidValue = parseFloat(debtPaidInput.value) || 0;
-//     const totaldebtValue = parseFloat(debtTotal.textContent.slice(1)) || 0;
-//     const percentage = (amountPaidValue / totaldebtValue) * 100;
-//     percentbar.style.width = percentage + '%';
-//   }
+function updatePercentBar() {
+    const amountPaidValue = parseFloat(debtPaidInput.value);
+    const totaldebtValue = parseFloat(debtTotalInput.value);
+    const percentage = (amountPaidValue / totaldebtValue) * 100;
+    percentbar.style.width = percentage + '%';
+    console.log('working');
+}
 
 // ---------end of functions----------
 
@@ -36,6 +38,8 @@ titalInput.addEventListener('dblclick', function(){
     if(tital.textContent == ''){
         tital.textContent = 'Debt'
     }
+
+    
 });
 // ---------------tital----------------------------------
 
@@ -49,7 +53,7 @@ debtPaidInput.addEventListener('dblclick', function(){
         debtPaid.textContent = '0.00'
     };
 
-    // updatePercentBar()
+    updatePercentBar()
 });
 // ---------------Debt paid-------------------------------
 
@@ -63,4 +67,4 @@ debtTotalInput.addEventListener('dblclick', function(){
         debtTotal.textContent = '0.00'
     }
 });
-
+// updatePercentBar()
