@@ -8,63 +8,52 @@ const percentbar = document.getElementById('percentbar');
 const btn = document.getElementById('btn');
 const addBtn = document.getElementById('add-btn');
 
+
 // -------end of variables----------------
 
 
-function EditMode(a , b){
-    a.style.display = 'none'
-    b.style.display = 'inline-block'
-}
-function viewMode(a , b){
-    a.style.display = 'inline-block'
-    b.style.display = 'none'
-}
-function updatePercentBar() {
-    const amountPaidValue = parseFloat(debtPaidInput.value);
-    const totaldebtValue = parseFloat(debtTotalInput.value);
-    const percentage = (amountPaidValue / totaldebtValue) * 100;
-    percentbar.style.width = percentage + '%';
-    console.log('working');
+function EditMode(){
+    const allP = document.querySelectorAll('p');
+    allP.forEach((p) => {
+        p.style.display = 'none';
+    });
+    const inputElements = document.querySelectorAll('input');
+    inputElements.forEach((input) => {
+        input.style.display = 'inline-block';
+    });
+    btn.textContent = 'Save'
 }
 
-// ---------end of functions----------
+function viewMode(){
+    const inputElements = document.querySelectorAll('input');
+    const allP = document.querySelectorAll('p');
+    let pIndex = 0;
+    inputElements.forEach((input, index) => {
+        input.style.display = 'none';
 
-tital.addEventListener('click', function(){
-    EditMode(tital, titalInput)
-});
-titalInput.addEventListener('dblclick', function(){
-    viewMode(tital, titalInput);
-    tital.textContent = titalInput.value;
-    if(tital.textContent == ''){
-        tital.textContent = 'Debt'
+        if (allP[pIndex].textContent === 'Out Of') {
+            pIndex++;
+        }
+        if (pIndex < allP.length) {
+            allP[pIndex].textContent = input.value;
+            pIndex++;
+        }
+    });
+    allP.forEach((p) => {
+        p.style.display = 'inline-block';
+    });
+    btn.textContent = 'Edit'
+    function updatePercentBar() {
+        const amountPaidValue = parseFloat(debtPaidInput.value);
+        const totaldebtValue = parseFloat(debtTotalInput.value);
+        const percentage = (amountPaidValue / totaldebtValue) * 100;
+        percentbar.style.width = percentage + '%';
     }
-
-    
-});
-// ---------------tital----------------------------------
-
-debtPaid.addEventListener('click', function(){
-    EditMode(debtPaid, debtPaidInput)
-});
-debtPaidInput.addEventListener('dblclick', function(){
-    viewMode(debtPaid, debtPaidInput);
-    debtPaid.textContent = debtPaidInput.value;
-    if(debtPaid.textContent == ''){
-        debtPaid.textContent = '0.00'
-    };
-
     updatePercentBar()
-});
-// ---------------Debt paid-------------------------------
+}
 
-debtTotal.addEventListener('click', function(){
-    EditMode(debtTotal, debtTotalInput)
-});
-debtTotalInput.addEventListener('dblclick', function(){
-    viewMode(debtTotal, debtTotalInput);
-    debtTotal.textContent = debtTotalInput.value;
-    if(debtTotal.textContent == ''){
-        debtTotal.textContent = '0.00'
-    }
-});
-// updatePercentBar()
+function editFunction() {
+   if (btn.textContent === 'Save') {
+    viewMode()
+   } else EditMode()
+}
