@@ -57,3 +57,20 @@ function editFunction() {
     viewMode()
    } else EditMode()
 }
+
+function addOuterBox() {
+    const body = document.querySelector('body'); // Parent container
+    const firstContainer = document.querySelector('.firstContainer'); // The outerBox to be duplicated
+
+    // Create a clone of the innerBox
+    const clonedfirstContainer = firstContainer.cloneNode(true);
+
+    // Clear input values in the cloned innerBox
+    const clonedInputElements = clonedfirstContainer.querySelectorAll('input');
+    clonedInputElements.forEach((input) => {
+        input.value = '';
+    });
+
+    // Append the cloned innerBox to the parent container
+    firstContainer.appendChild(clonedfirstContainer);
+}
